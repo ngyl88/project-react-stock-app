@@ -1,0 +1,1 @@
+export const symbols = ["AAPL", "FB", "VOD.L", "D05.SI"];

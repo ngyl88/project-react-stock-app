@@ -15,7 +15,7 @@ export const chartOptions = {
 };
 
 const dataStyle = {
-  fill: true,
+  fill: false,
   lineTension: 0.1,
   borderCapStyle: "butt",
   borderDash: [],

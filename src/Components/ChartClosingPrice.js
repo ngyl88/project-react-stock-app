@@ -4,11 +4,13 @@ import { chartOptions, chartDataStyling } from "./chart-settings";
 import { alphavantage } from "../Keys/key";
 import logo from "../logo.svg";
 import "../App.css";
+import { symbols } from '../SeedData/symbols';
 
 class ChartClosingPrice extends Component {
   constructor() {
     super();
     this.state = {
+      symbols: symbols,
       chartLoaded: false,
       chartData: {
         labels: [],
@@ -18,25 +20,19 @@ class ChartClosingPrice extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch(
-      "https://www.alphavantage.co/query?" +
-        "function=TIME_SERIES_DAILY" +
-        "&symbol=AAPL" +
-        "&apikey=" +
-        alphavantage
-    );
-    const data = await response.json();
-    const response2 = await fetch(
-      "https://www.alphavantage.co/query?" +
-        "function=TIME_SERIES_DAILY" +
-        "&symbol=FB" +
-        "&apikey=" +
-        alphavantage
-    );
-    const data2 = await response2.json();
+    const stocksInfo = [];
+
+    for (var i = 0; i < this.state.symbols.length; i++) {
+      const response = await fetch(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
+          this.state.symbols[i]
+        }&apikey=${alphavantage}`
+      );
+      stocksInfo.push(await response.json());
+    }
 
     this.setState({
-      chartData: this.formatData([data, data2]),
+      chartData: this.formatData(stocksInfo),
       chartLoaded: true
     });
 
@@ -81,13 +77,12 @@ class ChartClosingPrice extends Component {
       chartDataWrapper.datasets.push(returnObject);
       return returnObject;
     });
-    console.log('Chart Data', chartDataWrapper);
+    console.log("Chart Data", chartDataWrapper);
     return {
       ...chartDataWrapper
     };
   };
 
-  // todo: handling if data points are of different dates?
   getDailyData = json => {
     const dates = [];
     const closingPrices = [];
