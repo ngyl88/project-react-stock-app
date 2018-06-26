@@ -1,72 +1,53 @@
 import React, { Component } from "react";
-import { Line as LineChart } from "react-chartjs-2";
-import { chartOptions, chartDataStyling } from "./chart-settings";
+import MyLineChart from "./MyLineChart";
+import { chartDataStyling } from "./chart-data-styling";
 import { alphavantage } from "../Keys/key";
-import logo from "../logo.svg";
-import "../App.css";
-import { symbols } from '../SeedData/symbols';
 
 class ChartClosingPrice extends Component {
-  constructor() {
-    super();
-    this.state = {
-      symbols: symbols,
-      chartLoaded: false,
-      chartData: {
-        labels: [],
-        datasets: []
-      }
-    };
+  render() {
+    return <MyLineChart ref="chart" />;
   }
 
-  async componentDidMount() {
+  async parseDataToChart(stockSymbols) {
+    var isLoading = true;
     const stocksInfo = [];
 
-    for (var i = 0; i < this.state.symbols.length; i++) {
+    for (var i = 0; i < stockSymbols.length; i++) {
       const response = await fetch(
         `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
-          this.state.symbols[i]
+          stockSymbols[i]
         }&apikey=${alphavantage}`
       );
       stocksInfo.push(await response.json());
     }
 
-    this.setState({
-      chartData: this.formatData(stocksInfo),
-      chartLoaded: true
-    });
+    isLoading = false;
+    const formattedData = this.formatData(stocksInfo, stockSymbols);
 
-    console.log(this.refs.chart.chartInstance);
+    // MyLineChart function updateState(chartData, isLoading, isEmpty)
+    this.refs.chart.updateState(
+      formattedData,
+      isLoading,
+      formattedData.datasets.length === 0
+    );
   }
 
-  render() {
-    if (this.state.chartLoaded) {
-      return (
-        <LineChart
-          ref="chart"
-          data={this.state.chartData}
-          options={chartOptions}
-        />
-      );
-    } else
-      return (
-        <div ref="chart" className="loading-container">
-          <img src={logo} className="React-logo" alt="logo" />
-          <h1 className="loading-message">Downloading data</h1>
-        </div>
-      );
-  }
-
-  formatData = rawJSONDataArray => {
+  formatData = (rawJSONDataArray, symbols) => {
     const chartDataWrapper = {
       labels: [],
-      datasets: []
+      datasets: [],
+      errorIndexes: []
     };
 
-    rawJSONDataArray.map((rawJSONData, index) => {
+    rawJSONDataArray.forEach((rawJSONData, index) => {
+      if(rawJSONData['Error Message'] !== undefined) {
+        chartDataWrapper.errorIndexes.push(index);
+        return;
+      }
+
       const converted = this.getDailyData(rawJSONData);
       const returnObject = {
-        ...chartDataStyling[index]
+        ...chartDataStyling[index - chartDataWrapper.errorIndexes.length]
       };
 
       if (index === 0) {
@@ -75,7 +56,6 @@ class ChartClosingPrice extends Component {
       returnObject.label = converted.label;
       returnObject.data = converted.closingPrices;
       chartDataWrapper.datasets.push(returnObject);
-      return returnObject;
     });
     console.log("Chart Data", chartDataWrapper);
     return {
