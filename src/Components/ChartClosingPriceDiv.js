@@ -19,6 +19,7 @@ class ChartClosingPriceDiv extends Component {
         data={this.state.formattedData}
         isLoading={this.state.isLoading}
         emptyDiv={emptyDiv}
+        chartTitle={this.props.chartTitle}
       />
     );
   }

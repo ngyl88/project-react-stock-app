@@ -1,43 +1,41 @@
+const chartSeriesColor = [
+  "red",
+  "blueviolet",
+  "blue",
+  "green",
+  "black",
+  "orangered",
+  "orchid",
+  "lawngreen",
+  "lightsalmon",
+  "lightslategray",
+  "lightseagreen",
+  "lightskyblue",
+  "navy",
+  "darkolivegreen",
+  "mediumspringgreen",
+  "darkkhaki",
+  "mediumpurple",
+  "darkgoldenrod",
+  "coral",
+  "firebrick"
+];
+
 const dataStyle = {
+  backgroundColor: "white",
   fill: false,
-  lineTension: 0.1,
-  borderCapStyle: "butt",
-  borderDash: [],
-  borderDashOffset: 0.0,
-  borderJoinStyle: "miter",
-  pointBorderWidth: 1,
-  pointHoverRadius: 5,
+  lineTension: 0, //default=0.4, set to 0 for better performance
+  pointHoverBackgroundColor: "white",
   pointHoverBorderWidth: 2,
-  pointRadius: 1,
-  pointHitRadius: 10
+  pointRadius: 2 //default=3,
 };
 
-export const chartDataStyling = [
-  {
+export const chartDataStyling = chartSeriesColor.map((color, index) => {
+  return {
     ...dataStyle,
-    backgroundColor: "rgba(255,0,0,.05)",
-    borderColor: "rgba(255,0,0,1)",
-    pointBorderColor: "rgba(255,0,0,1)",
-    pointBackgroundColor: "rgba(255,0,0,1)",
-    pointHoverBackgroundColor: "#fff",
-    pointHoverBorderColor: "rgba(255,0,0,1)"
-  },
-  {
-    ...dataStyle,
-    backgroundColor: "rgba(0,0,255,.05)",
-    borderColor: "rgba(0,0,255,1)",
-    pointBorderColor: "rgba(0,0,255,1)",
-    pointBackgroundColor: "rgba(0,0,255,1)",
-    pointHoverBackgroundColor: "#fff",
-    pointHoverBorderColor: "rgba(0,0,255,1)"
-  },
-  {
-    ...dataStyle,
-    backgroundColor: "rgba(75,192,192,0.4)",
-    borderColor: "rgba(75,192,192,1)",
-    pointBorderColor: "rgba(75,192,192,1)",
-    pointBackgroundColor: "#fff",
-    pointHoverBackgroundColor: "rgba(75,192,192,1)",
-    pointHoverBorderColor: "rgba(220,220,220,1)"
-  }
-];
+    borderColor: chartSeriesColor[index],
+    pointBorderColor: chartSeriesColor[index],
+    pointBackgroundColor: chartSeriesColor[index],
+    pointHoverBorderColor: chartSeriesColor[index]
+  };
+});
