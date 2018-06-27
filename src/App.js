@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SearchForm from "./Components/SearchForm";
-import ChartClosingPrice from "./Components/ChartClosingPrice";
+import ChartClosingPriceDiv from "./Components/ChartClosingPriceDiv";
 import { symbols } from "./SeedData/symbols";
 
 class App extends Component {
@@ -9,10 +9,6 @@ class App extends Component {
     this.state = {
       symbols: symbols
     };
-  }
-  
-  componentDidMount() {
-    this.refs.chart.parseDataToChart([...this.state.symbols]);
   }
 
   render() {
@@ -27,7 +23,10 @@ class App extends Component {
           handleSubmitValue={this.handleSubmitOnSearchForm}
           validateInput={this.validationFormInput}
         />
-        <ChartClosingPrice ref="chart" symbols={this.state.symbols} />
+        <ChartClosingPriceDiv
+          symbols={this.state.symbols}
+          dataNotEmpty={this.state.symbols.length > 0}
+        />
       </div>
     );
   }
@@ -40,7 +39,6 @@ class App extends Component {
   };
 
   handleSubmitOnSearchForm = submittedValue => {
-    this.refs.chart.parseDataToChart([...this.state.symbols, submittedValue]);
     this.setState({
       symbols: [...this.state.symbols, submittedValue]
     });
