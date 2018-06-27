@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import SearchForm from "./Components/SearchForm";
-import ChartClosingPriceDiv from "./Components/ChartClosingPriceDiv";
+import HistoryClosing100Days from "./Components/HistoryClosing100Days";
 import { symbols } from "./SeedData/symbols";
 
 class App extends Component {
@@ -14,18 +13,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchForm
-          controlId="formSearchForStock"
-          inputLabel="Stock symbol:"
-          placeholder="Enter your stock symbol"
-          helpMessage="
-              Stock symbols does not contain spaces, eg. MSFT, VOD.L, D05.SI."
+        <HistoryClosing100Days 
           handleSubmitValue={this.handleSubmitOnSearchForm}
           validateInput={this.validationFormInput}
-        />
-        <ChartClosingPriceDiv
           symbols={this.state.symbols}
-          dataNotEmpty={this.state.symbols.length > 0}
+          chartDataNotEmpty={this.state.symbols.length > 0}
         />
       </div>
     );
