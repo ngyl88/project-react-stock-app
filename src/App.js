@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import HistoryClosing100Days from "./Components/HistoryClosing100Days";
+import PageTitle from "./Components/PageTitle";
+import PageBody from "./Components/PageBody";
 import { symbols } from "./SeedData/symbols";
+import "./App.css";
 
 class App extends Component {
   constructor() {
@@ -13,11 +15,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <HistoryClosing100Days 
-          handleSubmitValue={this.handleSubmitOnSearchForm}
-          validateInput={this.validationFormInput}
+        <PageTitle />
+        <PageBody
           symbols={this.state.symbols}
-          chartDataNotEmpty={this.state.symbols.length > 0}
+          closingChartDataNotEmpty={this.state.symbols.length > 0}
+          validationFormInput={this.validationFormInput}
+          handleSubmitOnSearchForm={this.handleSubmitOnSearchForm}
         />
       </div>
     );

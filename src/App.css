@@ -1,3 +1,21 @@
+.chartDiv {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.header {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.header-active {
+  font-style: italic;
+}
+
 .loading-container {
   text-align: center;
   background-color: #222;
@@ -5,9 +23,40 @@
   padding: 20px;
   color: white;
 }
-
 .loading-message {
   font-size: 1.5em;
+}
+
+.main-content {
+  background-color: lightgreen;
+  padding: 5px;
+}
+.main-nav {
+  color: white;
+  background-color: darkblue;
+  min-width: 20%;
+}
+
+.searchDiv > form {
+  /* background-color: white; */
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 0 5px;
+  margin: 10px;
+}
+
+.wrapper {
+  background-color: darkblue;
+}
+
+.full-width {
+  width: 100%;
+}
+.no-padding {
+  padding: 0;
+}
+.no-margin {
+  margin: 0;
 }
 
 .React-logo {

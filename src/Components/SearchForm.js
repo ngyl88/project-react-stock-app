@@ -37,23 +37,25 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <form>
-        <FormGroup
-          controlId={this.props.controlId}
-          validationState={this.state.validationState}
-        >
-          <ControlLabel>{this.props.inputLabel}</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.value}
-            placeholder={this.props.placeholder}
-            onKeyPress={this.handleKeyPress}
-            onChange={this.handleChange}
-          />
-          <FormControl.Feedback />
-          <HelpBlock>{this.props.helpMessage}</HelpBlock>
-        </FormGroup>
-      </form>
+      <div className="searchDiv">
+        <form>
+          <FormGroup
+            controlId={this.props.controlId}
+            validationState={this.state.validationState}
+          >
+            <ControlLabel>{this.props.inputLabel}</ControlLabel>
+            <FormControl
+              type="text"
+              value={this.state.value}
+              placeholder={this.props.placeholder}
+              onKeyPress={this.handleKeyPress}
+              onChange={this.handleChange}
+            />
+            <FormControl.Feedback />
+            <HelpBlock>{this.props.helpMessage}</HelpBlock>
+          </FormGroup>
+        </form>
+      </div>
     );
   }
 }

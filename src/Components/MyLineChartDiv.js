@@ -7,7 +7,7 @@ const MyLineChartDiv = props => {
   if (props.emptyDiv) return <div />;
   if (props.isLoading) return <Loading message="Downloading data" />;
   return (
-    <div>
+    <div className="chartDiv">
       <Line options={chartOptions} data={props.data} />
     </div>
   );
