@@ -1,3 +1,23 @@
+body {
+  font-size: 16px;
+}
+
+#nav {
+  background-color: darkblue;
+}
+#nav a {
+  color: white;
+}
+#nav a:focus, #nav a:hover {
+  color: navy;
+}
+#nav .dropdown-menu {
+  background-color: inherit;
+  border: 1px solid white;
+  margin-left: 12px;
+  
+}
+
 .chartDiv {
   background-color: white;
   border: 1px solid lightgray;
@@ -10,10 +30,12 @@
   color: white;
   font-weight: bold;
   font-size: 16px;
+  padding: 5px;
 }
 
-.header-active {
+.header-active-page {
   font-style: italic;
+  font-weight: bold;
 }
 
 .loading-container {
@@ -29,18 +51,18 @@
 
 .main-content {
   background-color: lightgreen;
+  min-height: 200px;
   padding: 5px;
 }
 .main-nav {
-  color: white;
   background-color: darkblue;
   min-width: 20%;
 }
 
 .searchDiv > form {
-  /* background-color: white; */
   border: 1px solid black;
   border-radius: 3px;
+  font-size: 14px;
   padding: 0 5px;
   margin: 10px;
 }
@@ -49,6 +71,9 @@
   background-color: darkblue;
 }
 
+.float-left {
+  float: left;
+}
 .full-width {
   width: 100%;
 }

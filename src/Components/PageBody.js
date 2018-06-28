@@ -1,26 +1,31 @@
 import React from "react";
-import { Grid, Row, Col } from "react-bootstrap";
-import Navbar from "./Navbar";
+import { Row, Col } from "react-bootstrap";
+import MyNavbar from "./MyNavbar";
+import MyNavbarXS from "./MyNavbarXS";
 import Content from "./Content";
 
-const PageBody = (props) => (
-  <div className="wrapper">
-    <Grid className="no-margin no-padding full-width">
-      <Row className="no-margin">
-        <Col xs={12} sm={4} md={3} className="no-padding">
-          <Navbar />
-        </Col>
-        <Col xs={12} sm={8} md={9} className="no-padding">
-          <Content
-            symbols={props.symbols}
-            closingChartDataNotEmpty={props.closingChartDataNotEmpty}
-            validationFormInput={props.validationFormInput}
-            handleSubmitOnSearchForm={props.handleSubmitOnSearchForm}
-          />
-        </Col>
-      </Row>
-    </Grid>
-  </div>
-);
+const PageBody = props => {
+  return (
+  <Row className="no-margin wrapper">
+    <MyNavbar
+      activeNavKey={props.activeNavKey}
+      handleSelectOnNav={props.handleSelectOnNav}
+    />
+    <MyNavbarXS
+      appName={props.appName}
+      activeNavKey={props.activeNavKey}
+      handleSelectOnNav={props.handleSelectOnNav}
+    />
+    <Col xs={12} sm={8} md={9} className="no-padding">
+      <Content
+        activeNavKey={props.activeNavKey}
+        symbols={props.symbols}
+        closingChartDataNotEmpty={props.closingChartDataNotEmpty}
+        validationFormInput={props.validationFormInput}
+        handleSubmitOnSearchForm={props.handleSubmitOnSearchForm}
+      />
+    </Col>
+  </Row>
+)};
 
 export default PageBody;

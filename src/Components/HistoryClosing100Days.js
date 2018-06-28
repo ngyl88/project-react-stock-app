@@ -1,15 +1,14 @@
 import React from "react";
 import SearchForm from "./SearchForm";
-import ChartClosingPriceDiv from "./ChartClosingPriceDiv";
+import ClosingPrice from "./ClosingPrice";
 import SearchStockHelperLink from "./StocksUtils";
+import { navMenu, historical100daysClosingKey } from "../Utils/nav-menu";
 
 const HistoryClosing100Days = props => {
-  const chartTitle = "100 days Historical Data";
+  const title = navMenu[historical100daysClosingKey];
   return (
     <div>
-      <h4 className="header-active">
-        Historical Closing Price for Past 100 Days
-      </h4>
+      <h4 className="header-active-page">{title}</h4>
       <SearchForm
         controlId="formSearchForStock"
         inputLabel="Stock symbol:"
@@ -20,10 +19,10 @@ const HistoryClosing100Days = props => {
         handleSubmitValue={props.handleSubmitOnSearchForm}
         validateInput={props.validationFormInput}
       />
-      <ChartClosingPriceDiv
+      <ClosingPrice
         symbols={props.symbols}
         dataNotEmpty={props.chartDataNotEmpty}
-        chartTitle={chartTitle}
+        chartTitle={title}
       />
     </div>
   );

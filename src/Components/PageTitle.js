@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PageTitle = () => (
+const PageTitle = (props) => (
     <div className="header">
-        <h3 className="no-margin">My Stocks App</h3>
+        <h3 className="no-margin">{props.appName}</h3>
     </div>
 );
 
