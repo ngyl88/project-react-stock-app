@@ -1,7 +1,32 @@
 import { chartDataStyling } from "../Utils/chart-settings";
 
-export const baseURL = "https://api.jumpstart.site/www.alphavantage.co/";
-export const apiKey = "";
+const baseURL = "https://api.jumpstart.site/www.alphavantage.co/";
+const apiKey = "";
+
+const apiKeyInQuery = apiKey.length === 0 ? "" : "&apikey=" + apiKey;
+export const callAPIGateway = async (stockSymbols, existingSymbolsWithDataset) => {
+  const stocksInfo = [];
+  const stocksSymbolsRequestQueue = [];
+  for (var i = 0; i < stockSymbols.length; i++) {
+    if (
+      existingSymbolsWithDataset.indexOf(stockSymbols[i]) === -1
+    ) {
+      const response = await fetch(
+        baseURL +
+          `query?function=TIME_SERIES_DAILY&symbol=${stockSymbols[i]}`
+          + apiKeyInQuery
+      );
+      // console.log(response.json());
+      stocksSymbolsRequestQueue.push(stockSymbols[i]);
+      stocksInfo.push(await response.json());
+    }
+  }
+
+  return {
+    stocksInfo: stocksInfo,
+    stocksSymbolsRequestQueue: stocksSymbolsRequestQueue
+  };
+};
 
 const getDailyClosingPrice = json => {
   const dates = [];

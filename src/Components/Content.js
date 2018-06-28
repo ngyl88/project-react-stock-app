@@ -5,7 +5,7 @@ import {
   historical100daysClosingKey
 } from "../Utils/nav-menu";
 import StocksListing from "./StocksListing";
-import ClosingPricePage from "./ClosingPricePage";
+import ClosingPrice from "./ClosingPrice";
 
 const Content = props => (
   <div className="main-content">
@@ -18,7 +18,7 @@ const Content = props => (
       />
     )}
     {props.activeNavKey === historical100daysClosingKey && (
-      <ClosingPricePage
+      <ClosingPrice
         symbols={props.symbols}
         chartDataNotEmpty={props.closingChartDataNotEmpty}
         validationFormInput={props.validationFormInput}
