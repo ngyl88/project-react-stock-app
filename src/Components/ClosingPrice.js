@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import MyLineChartDiv from "./MyLineChartDiv";
 import { chartDataStyling } from "./chart-data-styling";
-import { alphavantage } from "../Keys/key";
 
-class ChartClosingPriceDiv extends Component {
+class ClosingPrice extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -42,9 +41,9 @@ class ChartClosingPriceDiv extends Component {
 
     for (var i = 0; i < stockSymbols.length; i++) {
       const response = await fetch(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
+        `http://api.jumpstart.site:3000/www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
           stockSymbols[i]
-        }&apikey=${alphavantage}`
+        }`
       );
       stocksInfo.push(await response.json());
     }
@@ -117,4 +116,4 @@ class ChartClosingPriceDiv extends Component {
   };
 }
 
-export default ChartClosingPriceDiv;
+export default ClosingPrice;
