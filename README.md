@@ -28,8 +28,8 @@ npm install
 Modify the file /src/Utils/closingPriceAPI.js to the following baseURL and your API key
 
 ```
-export const baseURL = "https://www.alphavantage.co/";
-export const apiKey = '<YOUR_API_KEY>';
+const baseURL = "https://www.alphavantage.co/";
+const apiKey = '<YOUR_API_KEY>';
 ```
 
 Start the local server and browse to the page.
