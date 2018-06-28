@@ -41,7 +41,7 @@ class ClosingPrice extends Component {
 
     for (var i = 0; i < stockSymbols.length; i++) {
       const response = await fetch(
-        `http://api.jumpstart.site:3000/www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
+        `https://api.jumpstart.site/www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
           stockSymbols[i]
         }`
       );
