@@ -1,4 +1,6 @@
 import React from "react";
+import SearchForm from "./SearchForm";
+import SearchStockHelperLink from "./StocksUtils";
 import { navMenu, stocksListingKey } from "../Utils/nav-menu";
 
 const StocksListing = props => (
@@ -17,6 +19,16 @@ const StocksListing = props => (
         </div>
       );
     })}
+    <SearchForm
+      controlId="formSearchForStock"
+      inputLabel="Add stock:"
+      placeholder="Enter one stock symbol"
+      helperMessage="
+                Stock symbols does not contain spaces, eg. MSFT, VOD.L, D05.SI."
+      helperLink={<SearchStockHelperLink />}
+      handleSubmitValue={props.handleSubmitOnSearchForm}
+      validateInput={props.validationFormInput}
+    />
   </div>
 );
 
