@@ -1,5 +1,5 @@
 export const navMenu = {
-  '1': 'Stocks Listing',
+  '1': 'Stocks You Are Following',
   '2': 'Last 100 days Closing Price'
 };
 

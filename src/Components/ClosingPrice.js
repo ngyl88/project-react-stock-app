@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MyLineChartDiv from "./MyLineChartDiv";
-import { chartDataStyling } from "./chart-data-styling";
+import { chartDataStyling } from "../Utils/chart-data-styling";
 
 class ClosingPrice extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { chartDefaultOptions } from "./chart-settings";
+import { chartDefaultOptions } from "../Utils/chart-options";
 import Loading from "./Loading";
 
 const MyLineChartDiv = props => {

@@ -13,7 +13,7 @@ class App extends Component {
     super();
     this.state = {
       symbols: symbols,
-      activeNavKey: '1'
+      activeNavKey: "1"
     };
   }
 
@@ -34,19 +34,12 @@ class App extends Component {
             validationFormInput={this.validationFormInput}
             handleSubmitOnSearchForm={this.handleSubmitOnSearchForm}
             handleSelectOnNav={this.handleSelectOnNav}
+            removeSymbolOnClick={this.removeSymbolOnClick}
           />
         </Grid>
       </div>
     );
   }
-
-  /*componentDidMount() {
-    this.interval = setInterval(() => console.log(Date.now()), 30000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }*/
 
   validationFormInput = inputVal => {
     if (inputVal.length === 0) return null;
@@ -63,10 +56,20 @@ class App extends Component {
 
   handleSelectOnNav = eventKey => {
     if (Object.keys(navMenu).indexOf(eventKey) === -1) {
-      eventKey = '';
+      eventKey = "";
     }
     this.setState({
       activeNavKey: eventKey
+    });
+  };
+
+  removeSymbolOnClick = symbolToRemove => {
+    const index = this.state.symbols.indexOf(symbolToRemove);
+    this.setState({
+      symbols: [
+        ...this.state.symbols.slice(0, index),
+        ...this.state.symbols.slice(index + 1)
+      ]
     });
   };
 }

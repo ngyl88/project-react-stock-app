@@ -10,7 +10,10 @@ import HistoryClosing100Days from "./HistoryClosing100Days";
 const Content = props => (
   <div className="main-content">
     {props.activeNavKey === stocksListingKey && (
-      <StocksListing symbols={props.symbols} />
+      <StocksListing
+        symbols={props.symbols}
+        removeSymbolOnClick={props.removeSymbolOnClick}
+      />
     )}
     {props.activeNavKey === historical100daysClosingKey && (
       <HistoryClosing100Days

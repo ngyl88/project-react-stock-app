@@ -67,6 +67,16 @@ body {
   margin: 10px;
 }
 
+.stocks-remove {
+  background-color: white;
+  border-radius: 50%;
+  color: red;
+  font-weight: bolder;
+  margin: 0 5px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
 .wrapper {
   background-color: darkblue;
 }

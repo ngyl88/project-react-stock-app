@@ -23,6 +23,7 @@ const PageBody = props => {
         closingChartDataNotEmpty={props.closingChartDataNotEmpty}
         validationFormInput={props.validationFormInput}
         handleSubmitOnSearchForm={props.handleSubmitOnSearchForm}
+        removeSymbolOnClick={props.removeSymbolOnClick}
       />
     </Col>
   </Row>
