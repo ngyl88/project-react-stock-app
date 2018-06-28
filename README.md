@@ -1,6 +1,8 @@
 # React Stock App
 
-This application currently allows user to view the last 100 days closing price trend of multiple stocks from worldwide markets.
+This application currently allows user to enter stock symbols and display a chart depicting the closing price of multiple stocks for the past 100 days from worldwide markets.
+
+Demo Link: https://stock-app-2018-jumpstart2.netlify.com
 
 ## Getting Started
 
@@ -23,17 +25,14 @@ Run the following in terminal to install project dependencies.
 npm install
 ```
 
-Modify the API URL in the function formatChartData(stockSymbols) in file /src/Components/ClosingPrice.js
+Modify the file /src/Utils/closingPriceAPI.js to the following baseURL and your API key
 
 ```
-const response = await fetch(
-    `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
-      stockSymbols[i]
-    }&apikey=<YOUR_API_KEY>`
-);
+export const baseURL = "https://www.alphavantage.co/";
+export const apiKey = '<YOUR_API_KEY>';
 ```
 
-Start the server.
+Start the local server and browse to the page.
 
 ```
 npm start

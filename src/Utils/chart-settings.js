@@ -39,3 +39,19 @@ export const chartDataStyling = chartSeriesColor.map((color, index) => {
     pointHoverBorderColor: chartSeriesColor[index]
   };
 });
+
+export const chartDefaultOptions = {
+  scales: {
+    yAxes: [
+      {
+        scaleLabel: {
+          display: true,
+          labelString: "unit price"
+        }
+      }
+    ]
+  },
+  legend: {
+    position: "bottom"
+  }
+};

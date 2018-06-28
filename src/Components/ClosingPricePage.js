@@ -8,10 +8,10 @@ class ClosingPricePage extends Component {
   constructor() {
     super();
     this.state = {
-      symbolsForChart: []
+      additionalSymbolsForChart: []
     }
   }
-
+  
   render() {
     const title = navMenu[historical100daysClosingKey];
     return (
@@ -28,7 +28,7 @@ class ClosingPricePage extends Component {
           validateInput={this.props.validationFormInput}
         />
         <ClosingPrice
-          symbols={[...this.props.symbols, ...this.state.symbolsForChart]}
+          symbols={[...this.props.symbols, ...this.state.additionalSymbolsForChart]}
           dataNotEmpty={this.props.chartDataNotEmpty}
           chartTitle={title}
         />
@@ -38,7 +38,7 @@ class ClosingPricePage extends Component {
 
   handleSubmitOnChartSearchForm = submittedValue => {
     this.setState({
-      symbolsForChart: [...this.state.symbolsForChart, submittedValue]
+      additionalSymbolsForChart: [...this.state.additionalSymbolsForChart, submittedValue]
     });
   };
 };

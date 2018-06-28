@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 import MyLineChartDiv from "./MyLineChartDiv";
-import { chartDataStyling } from "../Utils/chart-data-styling";
+import { baseURL, apiKey, formatStockData } from "../Utils/closingPriceAPI";
 
 class ClosingPrice extends Component {
   constructor(props) {
     super();
     this.state = {
       isLoading: props.dataNotEmpty,
-      formattedData: undefined
+      formattedData: {
+        labels: [],
+        datasets: [],
+      },
+      invalidStockSymbols: [],
+      existingSymbolsWithDataset: [],
+      existingClosingPriceChartDataset: []
     };
   }
 
@@ -37,83 +43,41 @@ class ClosingPrice extends Component {
     this.setState({
       isLoading: true
     });
-    const stocksInfo = [];
 
+    const stocksInfo = [];
+    const stocksSymbolsRequestQueue = [];
+    const apiKeyInQuery = apiKey.length === 0 ? "" : "&apikey=" + apiKey;
     for (var i = 0; i < stockSymbols.length; i++) {
-      const response = await fetch(
-        `https://api.jumpstart.site/www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${
-          stockSymbols[i]
-        }`
-      );
-      stocksInfo.push(await response.json());
+      if(this.state.existingSymbolsWithDataset.indexOf(stockSymbols[i]) === -1) {
+        const response = await fetch(
+          baseURL +
+            `query?function=TIME_SERIES_DAILY&symbol=${stockSymbols[i]}` +
+            apiKeyInQuery
+        );
+        stocksSymbolsRequestQueue.push(stockSymbols[i]);
+        stocksInfo.push(await response.json());
+      }
     }
 
-    const chartData = this.formatStockData(stocksInfo, stockSymbols);
+    const chartData = formatStockData(stocksInfo, stocksSymbolsRequestQueue, this.state.existingSymbolsWithDataset.length);
+    const newSymbols = [];
+    const newClosingPriceChartDataset = [];
+    chartData.datasets.forEach((dataset) => {
+      newSymbols.push(dataset.label);
+      newClosingPriceChartDataset.push(dataset.data);
+    });
+    const combinedFormattedData = {
+      labels: this.state.formattedData.labels.length > 0 ? this.state.formattedData.labels : chartData.labels,
+      datasets: [...this.state.formattedData.datasets, ...chartData.datasets]
+    }
     this.setState({
       isLoading: false,
-      formattedData: chartData
+      formattedData: combinedFormattedData,
+      invalidStockSymbols: chartData.errors.length === 0 ? [] : chartData.errors,
+      existingSymbolsWithDataset: [...this.state.existingSymbolsWithDataset, ...newSymbols],
+      existingClosingPriceChartDataset: [...this.state.existingClosingPriceChartDataset, ...newClosingPriceChartDataset],
     });
   }
-
-  formatStockData = (rawJSONDataArray, symbols) => {
-    const chartDataWrapper = {
-      labels: [],
-      datasets: [],
-      errors: []
-    };
-
-    rawJSONDataArray.forEach((rawJSONData, index) => {
-      if (rawJSONData["Error Message"] !== undefined) {
-        chartDataWrapper.errors.push({
-          index: index,
-          json: rawJSONData
-        });
-        return;
-      }
-
-      try {
-        const converted = this.getDailyClosingPrice(rawJSONData);
-        const returnObject = {
-          ...chartDataStyling[index - chartDataWrapper.errors.length]
-        };
-
-        if (index === 0) {
-          chartDataWrapper.labels = converted.dates;
-        }
-        returnObject.label = converted.label;
-        returnObject.data = converted.closingPrices;
-        chartDataWrapper.datasets.push(returnObject);
-      } catch (error) {
-        chartDataWrapper.errors.push({
-          index: index,
-          json: rawJSONData
-        });
-      }
-    });
-    return {
-      ...chartDataWrapper
-    };
-  };
-
-  getDailyClosingPrice = json => {
-    const dates = [];
-    const closingPrices = [];
-    Object.entries(json["Time Series (Daily)"]).forEach(
-      (dailyData, index, json) => {
-        dates.push(dailyData[0]);
-        closingPrices.push(dailyData[1]["4. close"]);
-        return {
-          date: dailyData[0],
-          closingPrice: dailyData[1]["4. close"]
-        };
-      }
-    );
-    return {
-      label: json["Meta Data"]["2. Symbol"],
-      dates: dates.reverse(),
-      closingPrices: closingPrices.reverse()
-    };
-  };
 }
 
 export default ClosingPrice;
