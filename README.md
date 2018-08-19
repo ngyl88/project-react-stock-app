@@ -4,6 +4,8 @@ This application currently allows user to enter stock symbols and display a char
 
 Demo Link: https://stock-app-2018-jumpstart2.netlify.com
 
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -44,7 +46,6 @@ npm start
 - [React-Bootstrap](https://react-bootstrap.github.io/) - The UI framework used
 - [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2) - The React wrapper for Chart.js
 - [Alpha Vantage](https://www.alphavantage.co/) - Free APIs for realtime and historical stock data
-  This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## References
 
