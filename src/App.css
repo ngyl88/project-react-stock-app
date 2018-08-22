@@ -1,9 +1,13 @@
 body {
+  background: lightsteelblue;
+  width: 98%;
+  height: 98vh;
+  margin: 0 auto;
   font-size: 16px;
 }
 
 #nav {
-  background-color: darkblue;
+  background-color: transparent;
 }
 #nav a {
   color: white;
@@ -12,13 +16,20 @@ body {
   color: navy;
 }
 #nav .dropdown-menu {
-  background-color: inherit;
+  background-color: midnightblue;
   border: 1px solid white;
   margin-left: 12px;
-  
+}
+#nav .dropdown-menu>.active>a, #nav .dropdown-menu>.active>a:focus {
+  background-color: midnightblue;
+  color: white;
+}
+#nav .dropdown-menu>.active>a:hover {
+  background-color: white;
+  color: midnightblue;
 }
 
-.chartDiv {
+.chart-div {
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -26,7 +37,7 @@ body {
 }
 
 .header {
-  background-color: black;
+  background-color: midnightblue;
   color: white;
   font-weight: bold;
   font-size: 16px;
@@ -41,8 +52,8 @@ body {
 .loading-container {
   text-align: center;
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 300px;
+  padding: 60px;
   color: white;
 }
 .loading-message {
@@ -50,12 +61,12 @@ body {
 }
 
 .main-content {
-  background-color: lightgreen;
-  min-height: 200px;
+  background-color: lightcyan;
+  min-height: 400px;
   padding: 5px;
 }
 .main-nav {
-  background-color: darkblue;
+  background-color: transparent;
   min-width: 20%;
 }
 
@@ -78,7 +89,7 @@ body {
 }
 
 .wrapper {
-  background-color: darkblue;
+  background: linear-gradient(180deg, blue, navy);
 }
 
 .float-left {
