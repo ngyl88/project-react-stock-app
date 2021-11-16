@@ -6,6 +6,9 @@ Demo Link: https://stock-app-2018-jumpstart2.netlify.com
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+#### Build Status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aee7bfb6-68f8-42c5-addd-875be6b0c460/deploy-status)](https://app.netlify.com/sites/stock-app-2018-jumpstart2/deploys)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
