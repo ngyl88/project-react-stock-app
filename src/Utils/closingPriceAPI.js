@@ -1,24 +1,27 @@
 import { chartDataStyling } from "../Utils/chart-settings";
 
-const baseURL = "https://api.jumpstart.site/www.alphavantage.co/";
-const apiKey = "";
+const backendOrigin = process.env.REACT_APP_BACKEND;
 
-const apiKeyInQuery = apiKey.length === 0 ? "" : "&apikey=" + apiKey;
 export const callAPIGateway = async (stockSymbols, existingSymbolsWithDataset) => {
   const stocksInfo = [];
   const stocksSymbolsRequestQueue = [];
   for (var i = 0; i < stockSymbols.length; i++) {
-    if (
-      existingSymbolsWithDataset.indexOf(stockSymbols[i]) === -1
-    ) {
-      const response = await fetch(
-        baseURL +
-          `query?function=TIME_SERIES_DAILY&symbol=${stockSymbols[i]}`
-          + apiKeyInQuery
-      );
-      // console.log(response.json());
+    const isNewSymbol = existingSymbolsWithDataset.indexOf(stockSymbols[i]) === -1;
+    if (isNewSymbol) {
+      const response = await fetch(`${backendOrigin}/wrapper?symbol=${stockSymbols[i]}`, {
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': backendOrigin
+        },
+      });
+
+      // eslint-disable-next-line
+      const { message, result } = await response.json();
+      // console.log(message);
+      // console.log(result);
+
       stocksSymbolsRequestQueue.push(stockSymbols[i]);
-      stocksInfo.push(await response.json());
+      stocksInfo.push(result);
     }
   }
 

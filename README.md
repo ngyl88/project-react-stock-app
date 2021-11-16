@@ -27,11 +27,15 @@ Run the following in terminal to install project dependencies.
 npm install
 ```
 
-Modify the file /src/Utils/closingPriceAPI.js to the following baseURL and your API key
+Set up `REACT_APP_BACKEND` in .env or modify the fetch location in [source file: closingPriceAPI.js](./src/Utils/closingPriceAPI.js).
 
 ```
-const baseURL = "https://www.alphavantage.co/";
-const apiKey = '<YOUR_API_KEY>';
+    const response = await fetch(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbols[i]}&apikey=<YOUR_API_KEY>
+    );
+
+    stocksSymbolsRequestQueue.push(stockSymbols[i]);
+    stocksInfo.push(await response.json());
 ```
 
 Start the local server and browse to the page.
